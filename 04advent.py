@@ -87,6 +87,12 @@ class ExampleTestCases(unittest.TestCase):
             last_branch = createXmasTree(height, ornament).split("\n")[height + 1]
             self.assertIn(expected, last_branch)
 
+    def test_last_character_is_not_cr(self):
+        for case in test_cases:
+            height, ornament = case
+            tree = createXmasTree(height, ornament)
+            self.assertIsNot(tree[-1], "\n")
+
 
 if __name__ == "__main__":
     print(createXmasTree(5, "*"))
