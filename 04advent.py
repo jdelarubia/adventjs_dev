@@ -56,17 +56,15 @@ def createXmasTree(height, ornament):
     assert 0 < height < 101
     tree = ""
     max_width = height * 2 - 1
-    half = max_width // 2
-    width = 1
+    middle_point = max_width // 2
+    branch_width = 1
     for _ in range(height):
-        branch_str = ornament * width
-        n = (max_width - width) // 2
-        tree += ("_" * n) + branch_str + ("_" * n) + "\n"
-        # tree += f"{branch_str:_^{max_width}}\n"  # only works in Python 13
-        width += 2
-    tree += ("_" * half) + "#" + ("_" * half) + "\n"
-    tree += ("_" * half) + "#" + ("_" * half)
-    return tree
+        branch_str = ornament * branch_width
+        blanks = (max_width - branch_width) // 2
+        tree += ("_" * blanks) + branch_str + ("_" * blanks) + "\n"
+        branch_width += 2
+    trunk = f"{"_" * middle_point}#{"_" * middle_point}"
+    return tree + "".join([trunk, "\n", trunk])
 
 
 test_case1 = (5, "*")
