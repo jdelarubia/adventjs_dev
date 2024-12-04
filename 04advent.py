@@ -62,7 +62,7 @@ def createXmasTree(height, ornament):
         branch_str = ornament * width
         n = (max_width - width) // 2
         tree += ("_" * n) + branch_str + ("_" * n) + "\n"
-        # tree += f"{branch_str:_^{max_width}}\n"
+        # tree += f"{branch_str:_^{max_width}}\n"  # only works in Python 13
         width += 2
     tree += ("_" * half) + "#" + ("_" * half) + "\n"
     tree += ("_" * half) + "#" + ("_" * half)
