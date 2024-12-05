@@ -95,7 +95,7 @@ def organizeShoes(shoes):
             else:
                 I.append(size)
 
-    return sorted(list(res))
+    return list(res)
 
 
 test_case1 = [
