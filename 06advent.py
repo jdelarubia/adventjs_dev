@@ -92,16 +92,16 @@ def in_box(box):
     max_width = len(box[0])
     top = box[0] == "#" * max_width
     bottom = box[-1] == "#" * max_width
-    res = False
+    boxed = False
     if top and bottom:
         for line in box[1:-1]:
             first = line.find("#")
-            gift = line.find("*")
-            last = line.find("#", first + 1)
+            gift = line.find("*", first + 1)
+            last = line.find("#", gift + 1)
             if first < gift < last:
-                res = True
+                boxed = True
                 break
-    return res and top and bottom
+    return boxed and top and bottom
 
 
 if __name__ == "__main__":
