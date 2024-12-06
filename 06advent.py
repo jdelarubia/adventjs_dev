@@ -111,7 +111,7 @@ def in_box(box):
 
 
 if __name__ == "__main__":
-    for test_case in test_cases:
+    for idx, test_case in enumerate(test_cases):
         case, expected = test_case
-        print(in_box(case))
+        print(f"resultado test {idx:2}: {in_box(case)}")
     unittest.main(verbosity=2)
