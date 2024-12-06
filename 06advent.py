@@ -44,17 +44,18 @@ inBox([
 
 import unittest
 
-test_case1 = ["###", "#*#", "###"]  # true
-expected1 = True
-test_case2 = ["####", "#* #", "#  #", "####"]  # true
+test_case2 = ["###", "#*#", "###"]  # true
 expected2 = True
-test_case3 = ["#####", "#   #", "#  #*", "#####"]  # false
+test_case3 = ["#*#", "###", "###"]  # false
 expected3 = False
-test_case4 = ["#####", "#   #", "#   #", "#   #", "#####"]  # false
+test_case4 = ["###", "# #", "###"]
 expected4 = False
-test_case6 = ["#####", "#   #", "#  #*", "####"]
+test_case5 = ["####", "#* #", "#  #", "####"]  # true
+expected5 = True
+test_case6 = ["#####", "#   #", "#  #*", "#####"]  # false
 expected6 = False
-
+test_case7 = ["#####", "#   #", "#   #", "#   #", "#####"]  # false
+expected7 = False
 test_case8 = ["#####", "#   #", "#   #", "*#  #", "#####"]
 expected8 = False
 test_case9 = ["##*##", "#   #", "#   #", "#   #", "#####"]
@@ -63,16 +64,21 @@ test_case10 = ["####", "#  #", "##*#"]
 expected10 = False
 test_case11 = ["###", "###", "#*#"]
 expected11 = False
+test_case12 = ["#####", "#   #", "#  #*", "####"]
+expected12 = False
+
 test_cases = [
-    (test_case1, expected1),
     (test_case2, expected2),
     (test_case3, expected3),
     (test_case4, expected4),
+    (test_case5, expected5),
     (test_case6, expected6),
+    (test_case7, expected7),
     (test_case8, expected8),
     (test_case9, expected9),
     (test_case10, expected10),
     (test_case11, expected11),
+    (test_case12, expected12),
 ]
 
 
