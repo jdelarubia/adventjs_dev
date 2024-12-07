@@ -95,15 +95,16 @@ class ExampleTestCases(unittest.TestCase):
 
 
 def in_box(box):
+    border = "\u0023"
     max_width = len(box[0])
-    top = box[0] == "#" * max_width
-    bottom = box[-1] == "#" * max_width
+    top = box[0] == border * max_width
+    bottom = box[-1] == border * max_width
     boxed = False
     if top and bottom:
         for line in box[1:-1]:
-            first = line.find("#")
+            first = line.find(border)
             gift = line.find("*", first + 1)
-            last = line.find("#", gift + 1)
+            last = line.find(border, gift + 1)
             if first < gift < last:
                 boxed = True
                 break
