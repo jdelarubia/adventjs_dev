@@ -10,51 +10,74 @@ Luckily, the elf Pheralb has detected the pattern the grinch followed to jumble 
 
 He left us some examples:
 
-fixPackages('a(cb)de')
-# ➞ "abcde"
+fixPackages('a(cb)de')  # ➞ "abcde"
 # We reverse "cb" inside the parentheses
 
-fixPackages('a(bc(def)g)h')
-# ➞ "agdefcbh"
+fixPackages('a(bc(def)g)h')  # ➞ "agdefcbh"
 # 1st we reverse "def" → "fed", then we reverse "bcfedg" → "gdefcb"
 
-fixPackages('abc(def(gh)i)jk')
-# ➞ "abcighfedjk"
+fixPackages('abc(def(gh)i)jk')  # ➞ "abcighfedjk"
 # 1st we reverse "gh" → "hg", then "defhgi" → "ighfed"
 
-fixPackages('a(b(c))e')
-# ➞ "acbe"
+fixPackages('a(b(c))e')  # ➞ "acbe"
 # 1st we reverse "c" → "c", then "bc" → "cb"
 """
 
+import unittest
+
+package2 = "a(bc)de"
+expected2 = "acbde"
+package3 = "a(bc(def)g)h"
+expected3 = "agdefcbh"
+package4 = "abc(def(gh)i)jk"
+expected4 = "abcighfedjk"
+package5 = "a(b(c))e"
+expected5 = "acbe"
+package6 = "a(b(cd(efg)))h"
+expected6 = "acdgfebh"
+package7 = "(abc(def(ghi)))"
+expected7 = "defihgcba"
+package8 = "a(cb)de"
+expected8 = "abcde"
+test_cases = [
+    (package2, expected2),
+    (package3, expected3),
+    (package4, expected4),
+    (package5, expected5),
+    (package6, expected6),
+    (package7, expected7),
+    (package8, expected8),
+]
+
+
+class ExampleTestCases(unittest.TestCase):
+    def test_return_type_is_str(self):
+        for case, _ in test_cases:
+            self.assertIsInstance(fix_packages(case), str)
+
+    def test_return_value_match_expected(self):
+        for idx, case, expected in enumerate(test_cases):
+            self.assertEqual(fix_packages(case), expected, msg=f"ERROR TEST {idx}")
+
 
 def fix_packages(packages: str):
-    print(packages)
     first = packages.find("(")
     last = packages.rfind(")")
-    if last > first:
-        return
-    print(f"f: {first} : {packages[first]} | l: {last} : {packages[last]}")
+    if last <= first:
+        return packages
+    fix_packages(packages[first + 1 : last])
     reversed = packages[last - 1 : first : -1]
-    packages = packages.replace(packages[first:last], reversed)
-    return fix_packages(packages)
+    return (
+        packages.replace(packages[first + 1 : last], reversed)
+        .replace("(", "")
+        .replace(")", "")
+    )
 
-
-def fix_packages_test(packages):
-    first = packages.find("(")
-    last = packages.rfind(")")
-    reversed = ""
-    if first < last:
-        reversed = packages[last - 1 : first : -1]  #
-        # print(reversed)
-        packages = packages.replace(packages[first : last + 1], reversed)  #
-        print(packages)
-        return fix_packages(packages[first + 1 : last - 1])
-    return packages
-
-
-test_case1 = "a(cb)de"
-expected1 = "abcde"
 
 if __name__ == "__main__":
-    print(fix_packages(test_case1))
+    for case, expected in test_cases:
+        res = fix_packages(case)
+        print(f"encrypted: {case} | res: {res} | expected: {expected}")
+        assert res == expected
+
+    unittest.main(verbosity=2)
