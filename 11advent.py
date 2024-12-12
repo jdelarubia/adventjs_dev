@@ -23,9 +23,14 @@ decode_filename('987654321_elf-roster.csv.tempfile')  # ➞ "elf-roster.csv"
 import unittest
 
 test_cases = [
-    ("2023122512345678_sleighDesign.png.grinchwa", "sleighDesign.png"),
-    ("42_chimney_dimensions.pdf.hack2023", "chimney_dimensions.pdf"),
-    ("987654321_elf-roster.csv.tempfile", "elf-roster.csv"),
+    ("2023122512345678_sleighDesign.png.grinchwa", "sleighDesign.png"),  # test2
+    ("42_chimney_dimensions.pdf.hack2023", "chimney_dimensions.pdf"),  # test3
+    ("987654321_elf-roster.csv.tempfile", "elf-roster.csv"),  # test4
+    (
+        "2024120912345678_magic_wand-blueprint.jpg.grinchbackup",
+        "magic_wand-blueprint.jpg",
+    ),  # test5
+    ("51231_trainSchedule.txt.extra", "trainSchedule.txt"),  # test6
 ]
 
 
@@ -40,6 +45,14 @@ class ExampleTestCases(unittest.TestCase):
 
 
 def decode_filename(filename: str) -> str:
+    segments = filename.split("_")[1:]
+    name = "_".join(segments)
+    last = name.split(".")[:-1]
+    name = ".".join(last)
+    return name
+
+
+def decode_filename_local(filename: str) -> str:
     """TypeError: ".".join is not a function"""
     # clean last extension
     segments = filename.split(".")
