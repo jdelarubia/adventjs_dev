@@ -24,7 +24,7 @@ remove_snow('a') # -> "a"
 import unittest
 
 
-class TestExapleCases(unittest.TestCase):
+class TestExampleCases(unittest.TestCase):
     def test_return_type_is_str(self):
         for case, _ in test_cases:
             self.assertIsInstance(remove_snow(case), str)
